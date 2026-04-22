@@ -16,24 +16,37 @@ This project uses transfer learning on ResNet50 trained on 60,000+ real and AI-g
 - **Test Accuracy**: 88.7%
 - **AUC**: 0.957
 - **Training data**:
-  - 140k Real and Fake Faces dataset
-  - AI Face Detection Dataset
+  - [140k Real and Fake Faces](https://www.kaggle.com/datasets/xhlulu/140k-real-and-fake-faces)
+  - [AI Face Detection Dataset](https://www.kaggle.com/datasets/shahzaibshazoo/detect-ai-generated-faces-high-quality-dataset)
 
 ## Project Structure
+
 ai-detection/
-frontend/               # React frontend
-src/
-App.jsx
-data/                   # Training datasets (not included in repo)
-real-vs-fake/
-AI-face-detection-Dataset/
-splits/
-best_model.keras        # Trained model weights
-main.py                 # FastAPI backend
-requirements.txt        # Python dependencies
-training_log.csv        # Epoch-by-epoch training history
-ai-detection.ipynb      # Training notebook
-runtime.txt             # Python version for Render
+├── frontend/                       # React frontend
+│   ├── public/
+│   └── src/
+│       └── App.jsx
+├── data/                           # Training datasets (not included in repo)
+│   ├── real-vs-fake/
+│   │   ├── train/
+│   │   │   ├── fake/
+│   │   │   └── real/
+│   │   └── test/
+│   │       ├── fake/
+│   │       └── real/
+│   ├── AI-face-detection-Dataset/
+│   │   ├── AI/
+│   │   └── real/
+│   └── splits/
+│       ├── train/
+│       ├── val/
+│       └── test/
+├── best_model.keras                # Trained model weights
+├── main.py                         # FastAPI backend
+├── requirements.txt                # Python dependencies
+├── training_log.csv                # Epoch-by-epoch training history
+├── ai-detection.ipynb              # Training notebook
+└── runtime.txt                     # Python version for Render
 
 ## Tech Stack
 
