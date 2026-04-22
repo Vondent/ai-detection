@@ -6,14 +6,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import io
 
+import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # suppress TF logs
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # disable GPU lookup
+
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://your-vercel-app.vercel.app",  # ← add your Vercel URL here
-        "*"  # or just use wildcard to allow everything
+        "https://ai-detection-coral.vercel.app/"
     ],
     allow_methods=["*"],
     allow_headers=["*"],
