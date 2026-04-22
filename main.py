@@ -8,7 +8,6 @@ import io
 
 app = FastAPI()
 
-# CORS must be added before routes
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
@@ -16,7 +15,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load model once at startup
 model = tf.keras.models.load_model("best_model.keras")
 
 def preprocess_image(image_bytes):
@@ -26,32 +24,29 @@ def preprocess_image(image_bytes):
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
-@app.get("/")
-def root():
-    return {"message": "AI Face Detection API is running"}
-
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     image_bytes = await file.read()
     img_array = preprocess_image(image_bytes)
     
     prediction = model.predict(img_array)[0][0]
-    threshold = 0.193 # fine-tune with further testing
-    #print(f"RAW SCORE: {prediction}") 
+    threshold = 0.193
 
     label = "real" if prediction >= threshold else "fake"
 
-    # fake=0, real=1
     if label == "real":
         confidence = (prediction - threshold) / (1.0 - threshold)
     else:
         confidence = (threshold - prediction) / threshold
 
-    confidence_scaled = float(np.clip(confidence * 5, 0, 1))  # amplify by 5x, cap at 100%
-
+    confidence_scaled = float(np.clip(confidence * 5, 0, 1))
 
     return JSONResponse({
         "label": label,
         "confidence": round(confidence_scaled * 100, 2),
         "raw_score": float(prediction)
     })
+
+@app.get("/")
+def root():
+    return {"message": "AI Face Detection API is running"}

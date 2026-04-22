@@ -107,14 +107,14 @@ export default function App() {
               <div style={styles.barTrack}>
                 <div style={{
                   ...styles.barFill,
-                  width: `${result.confidence}%`,
+                  width: `${result.confidence * 100}%`,
                   background: isFake
                     ? "linear-gradient(90deg, #ff4d4d, #ff8080)"
                     : "linear-gradient(90deg, #00e676, #69f0ae)",
                 }} />
               </div>
               <p style={{ ...styles.confidenceValue, color: isFake ? "#ff4d4d" : "#00e676" }}>
-                {result.confidence}%
+                {result.confidence}
               </p>
             </div>
             <button style={styles.resetBtn} onClick={reset}>

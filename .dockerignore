@@ -1,0 +1,6 @@
+data/
+frontend/node_modules/
+__pycache__/
+*.ipynb
+training_log.csv
+.ipynb_checkpoints/
