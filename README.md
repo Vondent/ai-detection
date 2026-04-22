@@ -20,7 +20,7 @@ This project uses transfer learning on ResNet50 trained on 60,000+ real and AI-g
   - [AI Face Detection Dataset](https://www.kaggle.com/datasets/shahzaibshazoo/detect-ai-generated-faces-high-quality-dataset)
 
 ## Project Structure
-
+```
 ai-detection/
 ├── frontend/                       # React frontend
 │   ├── public/
@@ -47,7 +47,7 @@ ai-detection/
 ├── training_log.csv                # Epoch-by-epoch training history
 ├── ai-detection.ipynb              # Training notebook
 └── runtime.txt                     # Python version for Render
-
+```
 ## Tech Stack
 
 - **Frontend**: React.js, deployed on Vercel
