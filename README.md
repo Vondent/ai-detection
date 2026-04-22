@@ -1,19 +1,22 @@
 # AI Face Detection
 
-A deep learning web application that detects whether a face image is real or AI-generated.
+A full-stack deep learning web application that detects whether a face image is real or AI-generated.
+
+🔗 **Live Demo**: https://ai-detection-coral.vercel.app/
 
 ## Overview
 
-This project uses a fine-tuned ResNet model trained on a large dataset of real and AI-generated face images. It exposes a REST API via FastAPI and includes a React frontend for easy image upload and prediction.
+This project uses transfer learning on ResNet50 trained on 60,000+ real and AI-generated face images. It exposes a REST API via FastAPI and includes a React frontend for easy image upload and real-time prediction.
 
 ## Model
 
-- **Architecture**: ResNet (transfer learning)
+- **Architecture**: ResNet50 (transfer learning)
 - **Input size**: 160x160 RGB
 - **Task**: Binary classification (real vs fake)
-- **Metrics**: 88.7% accuracy, 0.957 AUC on test set
-- **Training data**: 
-  - [140k Real and Fake Faces](https://www.kaggle.com/datasets/xhlulu/140k-real-and-fake-faces)
+- **Test Accuracy**: 88.7%
+- **AUC**: 0.957
+- **Training data**:
+  - 140k Real and Fake Faces dataset
   - AI Face Detection Dataset
 
 ## Project Structure
@@ -30,8 +33,16 @@ main.py                 # FastAPI backend
 requirements.txt        # Python dependencies
 training_log.csv        # Epoch-by-epoch training history
 ai-detection.ipynb      # Training notebook
+runtime.txt             # Python version for Render
 
-## Getting Started
+## Tech Stack
+
+- **Frontend**: React.js, deployed on Vercel
+- **Backend**: FastAPI, deployed on Render
+- **Model**: TensorFlow/Keras, ResNet50
+- **Training**: Python, TensorFlow, NumPy, Pillow
+
+## Getting Started Locally
 
 ### Backend
 
@@ -70,6 +81,11 @@ Upload an image and receive a prediction.
 }
 ```
 
+## Deployment
+
+- **Backend**: Render (Python web service, 1GB RAM, port 10000)
+- **Frontend**: Vercel (connected to GitHub, auto-deploys on push)
+
 ## Training
 
 The model was trained using TensorFlow/Keras with the following setup:
@@ -78,7 +94,7 @@ The model was trained using TensorFlow/Keras with the following setup:
 - Loss: Binary crossentropy
 - Callbacks: EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 - Data augmentation via Keras image pipeline
-- CPU parallelism: 12 threads
+- Data split: 70% train, 15% val, 15% test
 
 To retrain from scratch, open `ai-detection.ipynb` and run all cells.
 
