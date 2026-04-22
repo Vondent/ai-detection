@@ -20,9 +20,9 @@ export default function App() {
     formData.append("file", file);
 
     try {
-      const res = await fetch("https://ai-detection-api.onrender.com/predict", {
-        method: "POST",
-        body: formData,
+      const res = await fetch("https://ai-detection-2exg.onrender.com/predict", {
+          method: "POST",
+          body: formData,
       });
       const data = await res.json();
       setResult(data);
