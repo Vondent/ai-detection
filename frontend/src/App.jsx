@@ -20,7 +20,7 @@ export default function App() {
     formData.append("file", file);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/predict", {
+      const res = await fetch("https://ai-detection-api.onrender.com/predict", {
         method: "POST",
         body: formData,
       });
